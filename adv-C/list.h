@@ -12,6 +12,6 @@ struct node{
 void list_push(nodeptr *,int );
 void list_pop(nodeptr *);
 void list_delete(nodeptr *);
-int list_length(nodeptr *);
+int list_length(const nodeptr *);
 
 #endif
