@@ -1,3 +1,11 @@
+/*
+	DESCRIPTION:This is the test file for the ADT list.h .
+	This involves calling list.c and it implements the basic
+	operations in a linked list using Test-Cases.
+	AUTHOR:R R SreeKrishna
+	EMAIL:krishna1994sree@gmail.com
+	VERSION:1.0
+*/
 #include <stdio.h>
 #include "list.h"
 int main()
