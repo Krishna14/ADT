@@ -81,5 +81,40 @@ int list_length(const nodeptr *ptr) //Added const, this function just counts,
 	}
 	return count;
 }
+/*void list_add(nodeptr *ptr,nodeptr ptr_1)
+{
+	nodeptr temp,temp_1;
+	temp = *ptr;
+	temp_1= ptr;
+	while(temp!= NULL)
+	{
+		(temp) = temp->next;
+	}
+}
+void list_sub(nodeptr *ptr,nodeptr ptr_1)
+{
 
-
+}*/
+void list_remove(nodeptr *ptr, int num)
+{
+	nodeptr temp;
+	temp = *ptr;
+	while((temp)->next!=NULL)
+	{
+		if((temp)->next == NULL && ((temp)->next)->data == num)
+		{
+			list_pop(ptr);
+		}
+		else
+		{
+			if(((temp)->next)->data == num)
+			{
+				free((temp)->next);
+				(temp)->next = (temp)->next->next;
+				break;
+			}
+			
+		}
+		temp = (temp)->next;
+	}
+}
