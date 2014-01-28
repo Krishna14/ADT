@@ -1,57 +1,90 @@
 #include <stdlib.h>
 #include "list.h"
 
-void list_push(nodeptr *ptr,int num)
+int list_push(nodeptr *ptr,int num)
 {
-	nodeptr *temp = NULL;
-	if(*ptr == NULL)
+	nodeptr temp = *ptr,temp_2;
+	if(temp == NULL)
 	{
-		temp = (nodeptr *)malloc(sizeof(node));
-		if(*temp == NULL)
-			return;
+		temp = (nodeptr)malloc(sizeof(node)); //Compare this line with yours :x
+		if(temp == NULL)
+			return -1; //Implement Error condition, return type is void, 
+					//keep it int or void *
 		else
 		{
-			(*temp)->data = num;
-			(*temp)->next = NULL;
+			(temp)->data = num;
+			(temp)->next = NULL;
+			*ptr = temp; //Assign *ptr as temp.
 		}
 	}
 	else
 	{
-		(*temp) = (*temp)->next;
-		list_push(temp,num);
+		for(;(temp)->next!=NULL;temp=(temp)->next)
+			;
+		temp_2 = (nodeptr)malloc(sizeof(node));
+		temp->next = temp_2;
+		temp_2->data = num;
+		temp_2->next = NULL;
 	}
 }
 void list_pop(nodeptr *ptr)
 {
-	nodeptr *temp=NULL,*temp_2=NULL;
-	(*temp) = (*ptr);
-	(*temp_2) = (*ptr);
-	while(*temp != NULL)
+/*	There are three cases:
+	1. *ptr is NULL
+	2. (*ptr)->next is NULL
+	3. (*ptr)->next->next-> ... ... ->next is NULL (The usual case)
+*/  
+	nodeptr temp = *ptr;
+	if(*ptr == NULL)
+		return;
+	else 
+		if((*ptr)->next == NULL)
+		{
+			free (*ptr);
+			*ptr == NULL; //Don't let Dangling pointers.
+			return;
+		}
+		else
+		{
+			while((temp)->next->next != NULL)
+			(temp) = temp->next;
+		}
+	free(temp->next);
+	temp->next = NULL;
+	return;
+	/*nodeptr temp=NULL,temp_2=NULL;
+	temp = *ptr;
+	temp_2 = *ptr;
+	while(temp != NULL)
 	{
-		(*temp_2) = (*temp);
+		(temp_2) = (temp);
 		(*temp) = (*temp)->next;
-	}
-	free(*temp);
-	(*temp_2)->next = NULL;
+	}*/
+//free(*temp); //What if *temp is null, here you will be freeing a NULL pointer
+
+	// (*temp_2)->next = NULL;
 }
 void list_delete(nodeptr *ptr)
 {
-	nodeptr *temp=NULL;
-	while(*ptr !=NULL)
-	{
-		(*temp) = (*ptr)->next;
-		free(*ptr);
-	}
+	while(*ptr != NULL)
+		list_pop(ptr);
+
 }
-int list_length(nodeptr *ptr)
+int list_length(const nodeptr *ptr) //Added const, this function just counts,
+									//It does not modify!
 {
-	nodeptr *temp=NULL;
-	*temp = *ptr;
+	nodeptr temp = *ptr;
 	int count = 0;
-	while(*temp != NULL)
+	while(temp != NULL)
 	{
 		count++;
-		(*temp) = (*temp)->next;
+		(temp) = (temp)->next;
 	}
 	return count;
 }
+
+/*PHEW*/
+/*	Where are the optional pieces of code?
+	Also Who is gonna write comments?
+	And revise pointers!
+*/
