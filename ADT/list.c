@@ -1,3 +1,18 @@
+/*
+	DESCRIPTION:This is the ".c" file for the ADT list.h .
+	"list.h" is an attempt to implement the basic operations on a linkedlist.
+	Many more functions are yet to be implemented.So stay tuned for Updates.
+	AUTHOR:R R SreeKrishna
+	EMAIL:krishna1994sree@gmail.com
+	VERSION:1.0
+*/
+/* LOGIC:The Logic to be implemented is that Linked lists are structures with 
+one or more piece(s) of data and a self-referential Pointer. We have used typedef
+for our convenience and have tried implementing Append, Delete,Delete the whole 
+list and count the number of elements in the list"
+*/
+//Header Files
+
 #include <stdlib.h>
 #include "list.h"
 
@@ -6,15 +21,14 @@ int list_push(nodeptr *ptr,int num)
 	nodeptr temp = *ptr,temp_2;
 	if(temp == NULL)
 	{
-		temp = (nodeptr)malloc(sizeof(node)); //Compare this line with yours :x
+		temp = (nodeptr)malloc(sizeof(node)); 
 		if(temp == NULL)
-			return -1; //Implement Error condition, return type is void, 
-					//keep it int or void *
+			return -1; 
 		else
 		{
 			(temp)->data = num;
 			(temp)->next = NULL;
-			*ptr = temp; //Assign *ptr as temp.
+			*ptr = temp;
 		}
 	}
 	else
@@ -29,11 +43,6 @@ int list_push(nodeptr *ptr,int num)
 }
 void list_pop(nodeptr *ptr)
 {
-/*	There are three cases:
-	1. *ptr is NULL
-	2. (*ptr)->next is NULL
-	3. (*ptr)->next->next-> ... ... ->next is NULL (The usual case)
-*/  
 	nodeptr temp = *ptr;
 	if(*ptr == NULL)
 		return;
@@ -52,17 +61,7 @@ void list_pop(nodeptr *ptr)
 	free(temp->next);
 	temp->next = NULL;
 	return;
-	/*nodeptr temp=NULL,temp_2=NULL;
-	temp = *ptr;
-	temp_2 = *ptr;
-	while(temp != NULL)
-	{
-		(temp_2) = (temp);
-		(*temp) = (*temp)->next;
-	}*/
-//free(*temp); //What if *temp is null, here you will be freeing a NULL pointer
-
-	// (*temp_2)->next = NULL;
+	
 }
 void list_delete(nodeptr *ptr)
 {
@@ -83,8 +82,4 @@ int list_length(const nodeptr *ptr) //Added const, this function just counts,
 	return count;
 }
 
-/*PHEW*/
-/*	Where are the optional pieces of code?
-	Also Who is gonna write comments?
-	And revise pointers!
-*/
+
